@@ -97,7 +97,7 @@ Note that kakoune's x doesn't behave exactly like this,
 but I like this behavior better."
   (interactive "p")
   (end-of-line)
-  (set-mark (point))
+  (unless (use-region-p) (set-mark (point)))
   (forward-line -count))
 
 
