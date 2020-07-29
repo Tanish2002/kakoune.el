@@ -81,14 +81,23 @@ Ignores CHAR at point."
     (kakoune-select-to-char count kakoune-last-char-selected-to)))
 
 (defun kakoune-x (count)
-  "Extend COUNT lines down from the current line.
+  "Extend COUNT lines up from the current line.
 
 Note that kakoune's x doesn't behave exactly like this,
 but I like this behavior better."
   (interactive "p")
-  (beginning-of-line)
-  (unless (use-region-p) (set-mark (point)))
-  (forward-line count))
+  (if (region-active-p)
+      (progn
+        (if (> count 0)
+            (progn
+              (forward-line count)
+              (end-of-line))
+          (progn
+            (forward-line 1)
+            (end-of-line))))
+    (progn
+      (end-of-line)
+      (set-mark (line-beginning-position)))))
 
 (defun kakoune-X (count)
   "Extend COUNT lines up from the current line.
@@ -96,9 +105,18 @@ but I like this behavior better."
 Note that kakoune's x doesn't behave exactly like this,
 but I like this behavior better."
   (interactive "p")
-  (end-of-line)
-  (unless (use-region-p) (set-mark (point)))
-  (previous-line count))
+  (if (region-active-p)
+      (progn
+        (if (> count 0)
+            (progn
+              (previous-line count)
+              (beginning-of-line))
+          (progn
+            (previous-line 1)
+            (beginning-of-line))))
+    (progn
+      (beginning-of-line)
+      (set-mark (line-end-position)))))
 
 
 (defun kakoune-d (count)
