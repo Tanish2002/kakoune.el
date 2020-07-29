@@ -98,7 +98,7 @@ but I like this behavior better."
   (interactive "p")
   (end-of-line)
   (unless (use-region-p) (set-mark (point)))
-  (forward-line -count))
+  (previous-line count))
 
 
 (defun kakoune-d (count)
