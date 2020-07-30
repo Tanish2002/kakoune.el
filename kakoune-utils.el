@@ -97,11 +97,8 @@ but I like this behavior better."
             (end-of-line))))
     (progn
       (end-of-line)
-      (set-mark (line-beginning-position))
-      (if (> count 1)
-          (progn
-            (forward-line count)
-            (end-of-line))))))
+      (set-mark (line-beginning-position)))))
+
 (defun kakoune-X (count)
   "Extend COUNT lines up from the current line.
 
@@ -119,11 +116,7 @@ but I like this behavior better."
             (beginning-of-line))))
     (progn
       (beginning-of-line)
-      (set-mark (line-end-position))
-      (if (> count 1)
-          (progn
-            (previous-line count)
-            (beginning-of-line))))))
+      (set-mark (line-end-position)))))
 
 
 (defun kakoune-d (count)
